@@ -9,7 +9,7 @@ phases:
       - mvn install
   build:
     commands:
-      - echo Building the project...
+      - echo Building the project.
       - mvn package
 artifacts:
   files:
