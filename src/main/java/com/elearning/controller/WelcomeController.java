@@ -1,6 +1,7 @@
 package com.elearning.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,5 +12,10 @@ public class WelcomeController {
     @GetMapping("/welcome")
     public String helloWorld() {
         return "{\"message\": \"Hello World!\"}";
+    }
+
+    @GetMapping("/message/{str}")
+    public String helloName(@PathVariable String str) {
+        return String.format("{\"message\": \"%s\"}");
     }
 }
