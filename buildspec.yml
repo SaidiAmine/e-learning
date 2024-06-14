@@ -14,11 +14,11 @@ phases:
       - echo Building the Maven project...
       - mvn clean install
       - echo Building the Docker image...
-      - docker build -t $DOCKERHUB_USERNAME/elearning:$CODEBUILD_RESOLVED_SOURCE_VERSION .
+      - docker build -t $DOCKERHUB_USERNAME/elearning:${CODEBUILD_RESOLVED_SOURCE_VERSION} .
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $DOCKERHUB_USERNAME/elearning:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $DOCKERHUB_USERNAME/elearning:${CODEBUILD_RESOLVED_SOURCE_VERSION}
       - echo Build completed on `date`
 
 artifacts:
