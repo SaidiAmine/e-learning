@@ -9,12 +9,15 @@ phases:
     commands:
       - echo Logging in to Docker Hub...
       - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+      - echo Extracting project version...
+      - export VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+      - echo Project version is $VERSION
   build:
     commands:
       - echo Building the Maven project...
       - mvn clean install
       - echo Building the Docker image...
-      - docker build -t $DOCKERHUB_USERNAME/elearning:${CODEBUILD_RESOLVED_SOURCE_VERSION} .
+      - docker build --build-arg JAR_FILE=elearning-${VERSION}.jar -t $DOCKERHUB_USERNAME/elearning:${CODEBUILD_RESOLVED_SOURCE_VERSION} .
   post_build:
     commands:
       - echo Pushing the Docker image...

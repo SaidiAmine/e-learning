@@ -8,5 +8,6 @@ RUN mvn clean install
 # Use an official OpenJDK runtime as a parent image
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=build /app/target/elearning.jar elearning.jar
+ARG JAR_FILE
+COPY --from=build /app/target/${JAR_FILE} elearning.jar
 ENTRYPOINT ["java", "-jar", "elearning.jar"]
